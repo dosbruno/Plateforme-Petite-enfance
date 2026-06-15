@@ -4,167 +4,851 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plateforme Petite Enfance - Maurepas</title>
+
   <style>
+    :root {
+      --bleu: #005f73;
+      --bleu-clair: #0a9396;
+      --vert: #2a9d8f;
+      --orange: #ee9b00;
+      --rouge: #d62828;
+      --fond: #f4f7f9;
+      --texte: #1f2933;
+      --gris: #667085;
+      --blanc: #ffffff;
+      --ombre: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --arrondi: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #1f2933;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--fond);
+      color: var(--texte);
+      line-height: 1.6;
     }
 
     header {
-      background: #005f73;
+      background: linear-gradient(135deg, #005f73, #0a9396);
       color: white;
-      padding: 30px 20px;
+      padding: 45px 20px;
       text-align: center;
     }
 
     header h1 {
       margin: 0;
-      font-size: 32px;
+      font-size: 38px;
     }
 
     header p {
-      margin-top: 10px;
       font-size: 18px;
+      max-width: 850px;
+      margin: 15px auto 0;
+    }
+
+    nav {
+      background: white;
+      box-shadow: var(--ombre);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0;
+      padding: 14px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--bleu);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      background: #e6f4f5;
     }
 
     main {
-      max-width: 1000px;
-      margin: 30px auto;
+      max-width: 1180px;
+      margin: 35px auto;
       padding: 0 20px;
     }
 
     section {
       background: white;
-      margin-bottom: 20px;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+      margin-bottom: 28px;
+      border-radius: var(--arrondi);
+      box-shadow: var(--ombre);
     }
 
     h2 {
-      color: #005f73;
+      color: var(--bleu);
       margin-top: 0;
+      font-size: 28px;
     }
 
-    ul {
-      line-height: 1.8;
+    h3 {
+      color: var(--bleu);
+      margin-bottom: 8px;
     }
 
-    .quiz-question {
-      margin-bottom: 15px;
+    .intro-grid,
+    .cards,
+    .ressources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #f8fbfc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .card span {
+      display: inline-block;
+      background: #e6f4f5;
+      color: var(--bleu);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .important {
+      background: #fff7e6;
+      border-left: 6px solid var(--orange);
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .alerte {
+      background: #fff1f2;
+      border-left: 6px solid var(--rouge);
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .quiz-container {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 24px;
+      background: #f8fbfc;
+    }
+
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      color: var(--gris);
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      background: #e5e7eb;
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: var(--bleu-clair);
+      transition: 0.3s;
+    }
+
+    .question {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .option {
+      display: block;
+      background: white;
+      border: 2px solid #d0d7de;
+      padding: 14px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .option:hover {
+      border-color: var(--bleu-clair);
+      background: #f0fdfa;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    .option.correct {
+      border-color: var(--vert);
+      background: #ecfdf5;
+    }
+
+    .option.incorrect {
+      border-color: var(--rouge);
+      background: #fef2f2;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 14px;
+      background: white;
+      border-left: 6px solid var(--bleu-clair);
+    }
+
+    .feedback.visible {
+      display: block;
+    }
+
+    .feedback.good {
+      border-left-color: var(--vert);
+    }
+
+    .feedback.bad {
+      border-left-color: var(--rouge);
     }
 
     button {
-      background: #0a9396;
-      color: white;
       border: none;
-      padding: 12px 18px;
-      border-radius: 8px;
-      cursor: pointer;
+      border-radius: 12px;
+      padding: 13px 18px;
       font-size: 16px;
-    }
-
-    button:hover {
-      background: #007f82;
-    }
-
-    #resultat {
+      cursor: pointer;
       margin-top: 15px;
-      font-weight: bold;
+      margin-right: 10px;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: var(--bleu);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #004c5c;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #1f2933;
+    }
+
+    .resultat-final {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+      border: 2px solid #e2e8f0;
+    }
+
+    .score {
+      font-size: 44px;
+      color: var(--bleu);
+      font-weight: 800;
     }
 
     footer {
       text-align: center;
-      padding: 20px;
-      color: #555;
+      color: #667085;
+      padding: 30px 20px;
       font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+      header h1 {
+        font-size: 30px;
+      }
+
+      section {
+        padding: 22px;
+      }
+
+      .question {
+        font-size: 19px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <header>
     <h1>Plateforme Petite Enfance</h1>
-    <p>Ressources, informations et quiz pour les professionnels du service</p>
+    <p>
+      Un espace de ressources, de repères professionnels et de quiz pour accompagner les équipes dans leurs pratiques quotidiennes.
+    </p>
   </header>
+
+  <nav>
+    <ul>
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#qualite">Qualité d’accueil</a></li>
+      <li><a href="#ressources">Ressources</a></li>
+      <li><a href="#vigilance">Points de vigilance</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+    </ul>
+  </nav>
 
   <main>
 
-    <section>
+    <section id="accueil">
       <h2>Bienvenue</h2>
       <p>
-        Cette plateforme a vocation à centraliser des ressources utiles pour les équipes Petite Enfance :
-        rappels réglementaires, informations internes, supports de formation et quiz de révision.
+        Cette plateforme est un premier prototype. Elle a vocation à devenir un outil simple, accessible et évolutif pour les professionnels de la Petite Enfance.
       </p>
-    </section>
 
-    <section>
-      <h2>Rubriques prévues</h2>
-      <ul>
-        <li>Actualités du service Petite Enfance</li>
-        <li>Ressources réglementaires</li>
-        <li>Qualité d’accueil</li>
-        <li>Santé, sécurité et prévention</li>
-        <li>Quiz de formation pour les agents</li>
-      </ul>
-    </section>
+      <div class="intro-grid">
+        <div class="card">
+          <span>Objectif 1</span>
+          <h3>Centraliser les informations</h3>
+          <p>
+            Regrouper les repères utiles : qualité d’accueil, santé, sécurité, posture professionnelle, relation aux familles et fonctionnement du service.
+          </p>
+        </div>
 
-    <section>
-      <h2>Premier quiz</h2>
+        <div class="card">
+          <span>Objectif 2</span>
+          <h3>Former progressivement</h3>
+          <p>
+            Proposer des rappels courts, des quiz et des supports simples pour favoriser une culture commune au sein des équipes.
+          </p>
+        </div>
 
-      <div class="quiz-question">
-        <p>Question : en crèche, la qualité d’accueil concerne principalement :</p>
-
-        <label>
-          <input type="radio" name="quiz" value="faux">
-          uniquement l’hygiène des locaux
-        </label>
-        <br>
-
-        <label>
-          <input type="radio" name="quiz" value="vrai">
-          le bien-être de l’enfant, la sécurité affective, les pratiques professionnelles et la relation aux familles
-        </label>
-        <br>
-
-        <label>
-          <input type="radio" name="quiz" value="faux">
-          uniquement le respect des horaires
-        </label>
+        <div class="card">
+          <span>Objectif 3</span>
+          <h3>Faciliter les pratiques</h3>
+          <p>
+            Donner des repères concrets pour aider les agents dans les situations du quotidien, sans remplacer les procédures officielles.
+          </p>
+        </div>
       </div>
 
-      <button onclick="verifierReponse()">Valider ma réponse</button>
+      <div class="important">
+        Ce site est un support pédagogique. Il ne remplace pas le règlement de fonctionnement, les protocoles, les consignes hiérarchiques ou les textes réglementaires applicables.
+      </div>
+    </section>
 
-      <p id="resultat"></p>
+    <section id="qualite">
+      <h2>Qualité d’accueil</h2>
+
+      <p>
+        La qualité d’accueil en Petite Enfance ne se limite pas à l’hygiène, à la sécurité ou à l’organisation. Elle repose sur une approche globale de l’enfant, de sa famille et des pratiques professionnelles.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <span>Enfant</span>
+          <h3>Sécurité affective</h3>
+          <p>
+            L’enfant a besoin de repères stables, d’adultes disponibles, d’une attention individualisée et d’un environnement prévisible.
+          </p>
+        </div>
+
+        <div class="card">
+          <span>Familles</span>
+          <h3>Coéducation</h3>
+          <p>
+            Les familles sont les premiers éducateurs de l’enfant. Le dialogue, les transmissions et la confiance mutuelle sont essentiels.
+          </p>
+        </div>
+
+        <div class="card">
+          <span>Professionnels</span>
+          <h3>Posture professionnelle</h3>
+          <p>
+            Observer, ajuster, verbaliser, se questionner en équipe et respecter le rythme de l’enfant font partie du cœur du métier.
+          </p>
+        </div>
+
+        <div class="card">
+          <span>Organisation</span>
+          <h3>Projet commun</h3>
+          <p>
+            La cohérence d’équipe permet d’assurer une continuité dans l’accueil et d’éviter les pratiques trop individuelles ou contradictoires.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ressources">
+      <h2>Ressources professionnelles</h2>
+
+      <div class="ressources-grid">
+        <div class="card">
+          <h3>Projet d’établissement</h3>
+          <p>
+            Document de référence qui présente les orientations éducatives, sociales, pédagogiques et organisationnelles de la structure.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Règlement de fonctionnement</h3>
+          <p>
+            Document opposable aux familles. Il précise les règles d’accueil, de présence, de facturation, de santé et de vie collective.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Protocoles</h3>
+          <p>
+            Ils apportent des repères opérationnels en matière de santé, sécurité, hygiène, administration de soins ou conduite à tenir.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Analyse des pratiques</h3>
+          <p>
+            Temps de recul permettant aux professionnels de réfléchir collectivement aux situations rencontrées et à leur posture.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Prévention</h3>
+          <p>
+            La prévention concerne les risques physiques, psychiques, organisationnels et relationnels dans les lieux d’accueil.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Formation continue</h3>
+          <p>
+            Elle permet d’actualiser les connaissances, de renforcer les compétences et de soutenir la qualité du service rendu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="vigilance">
+      <h2>Points de vigilance</h2>
+
+      <div class="alerte">
+        Aucun contenu nominatif ou confidentiel ne doit être publié sur ce site : pas de nom d’enfant, pas de situation familiale, pas de document médical, pas de PAI réel, pas de donnée RH.
+      </div>
+
+      <div class="cards" style="margin-top: 20px;">
+        <div class="card">
+          <h3>Confidentialité</h3>
+          <p>
+            Les professionnels sont tenus à la discrétion professionnelle. Les situations individuelles doivent rester dans les circuits sécurisés et autorisés.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Communication aux familles</h3>
+          <p>
+            Les informations transmises aux familles doivent être claires, cohérentes, respectueuses et conformes aux règles du service.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Santé et sécurité</h3>
+          <p>
+            Toute situation sensible doit être traitée selon les protocoles existants et avec l’appui des responsables compétents.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <h2>Quiz professionnel Petite Enfance</h2>
+
+      <p>
+        Ce quiz de 20 questions permet de réviser les grands repères de la qualité d’accueil, de la posture professionnelle et du fonctionnement en EAJE.
+      </p>
+
+      <div class="quiz-container" id="quizContainer">
+        <div class="quiz-top">
+          <div id="questionNumber">Question 1 / 20</div>
+          <div id="scoreLive">Score : 0</div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="question" id="questionText"></div>
+
+        <div id="options"></div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <button class="btn-primary" id="validateBtn" onclick="validateAnswer()">Valider</button>
+        <button class="btn-secondary" id="nextBtn" onclick="nextQuestion()" style="display:none;">Question suivante</button>
+      </div>
     </section>
 
   </main>
 
   <footer>
-    Ville de Maurepas - Service Petite Enfance
+    Ville de Maurepas - Service Petite Enfance - Prototype pédagogique
   </footer>
 
   <script>
-    function verifierReponse() {
-      const reponse = document.querySelector('input[name="quiz"]:checked');
-      const resultat = document.getElementById('resultat');
+    const questions = [
+      {
+        question: "La qualité d’accueil en EAJE concerne principalement :",
+        options: [
+          "Uniquement la propreté des locaux",
+          "Uniquement le respect des horaires",
+          "Le bien-être de l’enfant, la sécurité affective, les pratiques professionnelles et la relation aux familles"
+        ],
+        answer: 2,
+        explanation: "La qualité d’accueil est globale. Elle concerne l’enfant, sa famille, les pratiques professionnelles, l’environnement, la sécurité, l’organisation et le projet éducatif."
+      },
+      {
+        question: "La familiarisation d’un enfant sert avant tout à :",
+        options: [
+          "Habituer progressivement l’enfant, sa famille et les professionnels à la séparation",
+          "Faire gagner du temps à l’équipe",
+          "Tester si l’enfant pleure beaucoup"
+        ],
+        answer: 0,
+        explanation: "La familiarisation permet de construire progressivement la confiance. Elle concerne l’enfant, les parents et les professionnels."
+      },
+      {
+        question: "La coéducation signifie que :",
+        options: [
+          "Les parents doivent appliquer exactement les pratiques de la crèche",
+          "Les professionnels remplacent les parents pendant la journée",
+          "Parents et professionnels coopèrent dans l’intérêt de l’enfant"
+        ],
+        answer: 2,
+        explanation: "La coéducation repose sur la reconnaissance du rôle des parents et sur un dialogue respectueux entre famille et professionnels."
+      },
+      {
+        question: "Une transmission de qualité aux familles doit être :",
+        options: [
+          "Claire, utile, respectueuse et centrée sur l’enfant",
+          "Très longue et technique",
+          "Réservée uniquement aux problèmes"
+        ],
+        answer: 0,
+        explanation: "Les transmissions doivent donner des informations utiles sur la journée de l’enfant, sans jugement et avec une posture professionnelle."
+      },
+      {
+        question: "La sécurité affective de l’enfant repose notamment sur :",
+        options: [
+          "Des repères stables et des adultes disponibles",
+          "Des changements fréquents pour stimuler l’enfant",
+          "L’absence totale de frustration"
+        ],
+        answer: 0,
+        explanation: "L’enfant a besoin de stabilité, de continuité, de disponibilité adulte et de repères pour explorer sereinement."
+      },
+      {
+        question: "Observer un enfant permet principalement de :",
+        options: [
+          "Surveiller pour sanctionner",
+          "Comprendre ses besoins, ses compétences et ses émotions",
+          "Comparer les enfants entre eux"
+        ],
+        answer: 1,
+        explanation: "L’observation professionnelle permet d’ajuster l’accompagnement à l’enfant réel, et non à une idée générale de ce qu’il devrait faire."
+      },
+      {
+        question: "La motricité libre consiste à :",
+        options: [
+          "Laisser l’enfant évoluer selon ses capacités, sans le mettre dans une position qu’il ne maîtrise pas",
+          "Interdire toute aide de l’adulte",
+          "Laisser les enfants courir sans cadre"
+        ],
+        answer: 0,
+        explanation: "La motricité libre respecte le rythme de développement de l’enfant. L’adulte sécurise l’environnement et accompagne sans forcer les acquisitions."
+      },
+      {
+        question: "Une posture bientraitante implique :",
+        options: [
+          "De parler à l’enfant avec respect, même lorsqu’on pose une limite",
+          "De céder systématiquement à toutes les demandes",
+          "D’éviter toute règle"
+        ],
+        answer: 0,
+        explanation: "La bientraitance n’exclut pas le cadre. Elle demande de poser les limites avec respect, cohérence et compréhension des besoins de l’enfant."
+      },
+      {
+        question: "En cas de doute sur une situation préoccupante concernant un enfant, il faut :",
+        options: [
+          "Garder l’information pour soi",
+          "En parler à n’importe quel parent pour avoir un avis",
+          "Suivre la procédure interne et alerter les responsables compétents"
+        ],
+        answer: 2,
+        explanation: "Une situation préoccupante doit être traitée avec sérieux, discrétion et dans le cadre des procédures prévues."
+      },
+      {
+        question: "La discrétion professionnelle signifie que :",
+        options: [
+          "Les informations sensibles doivent rester dans un cadre professionnel autorisé",
+          "On peut raconter les situations sans donner les noms",
+          "On peut tout partager avec ses proches si c’est anonymisé"
+        ],
+        answer: 0,
+        explanation: "La discrétion professionnelle protège les enfants, les familles, les agents et le service. Les situations individuelles ne se partagent pas hors du cadre prévu."
+      },
+      {
+        question: "Un PAI est principalement destiné à :",
+        options: [
+          "Organiser un accueil adapté lorsqu’un besoin de santé le justifie",
+          "Permettre à chaque famille de choisir librement un menu différent",
+          "Remplacer le règlement de fonctionnement"
+        ],
+        answer: 0,
+        explanation: "Le PAI organise les conditions d’accueil d’un enfant ayant un besoin de santé spécifique. Il doit s’inscrire dans un cadre médical et institutionnel clair."
+      },
+      {
+        question: "Le rôle d’un référent santé et accueil inclusif est notamment de :",
+        options: [
+          "Remplacer la direction de la crèche",
+          "Contribuer aux questions de santé, prévention et inclusion",
+          "Décider seul de toutes les admissions"
+        ],
+        answer: 1,
+        explanation: "Le référent santé et accueil inclusif apporte un appui sur la santé, la prévention, l’inclusion et l’accueil des enfants à besoins particuliers."
+      },
+      {
+        question: "Lors d’une forte chaleur, l’équipe doit prioritairement :",
+        options: [
+          "Maintenir les activités extérieures coûte que coûte",
+          "Adapter l’organisation, hydrater régulièrement, limiter l’exposition et surveiller les signes d’inconfort",
+          "Fermer systématiquement la structure"
+        ],
+        answer: 1,
+        explanation: "La chaleur nécessite une adaptation concrète : hydratation, aération selon les conditions, zones fraîches, limitation des efforts et surveillance des enfants."
+      },
+      {
+        question: "Une équipe cohérente est une équipe qui :",
+        options: [
+          "Fait toujours exactement la même chose sans réfléchir",
+          "Partage des repères communs tout en s’adaptant aux situations",
+          "Évite de discuter des désaccords"
+        ],
+        answer: 1,
+        explanation: "La cohérence d’équipe repose sur des repères partagés, des échanges réguliers et une capacité à ajuster les pratiques."
+      },
+      {
+        question: "La place du jeu en crèche est :",
+        options: [
+          "Secondaire par rapport aux apprentissages formels",
+          "Centrale, car le jeu est un mode essentiel de développement de l’enfant",
+          "Utile seulement pour occuper les enfants"
+        ],
+        answer: 1,
+        explanation: "Le jeu soutient le développement moteur, cognitif, social, émotionnel et langagier de l’enfant."
+      },
+      {
+        question: "L’accueil d’un enfant en situation de handicap ou à besoins particuliers suppose :",
+        options: [
+          "Une réflexion d’équipe et des adaptations raisonnables",
+          "Une mise à l’écart systématique",
+          "Une prise en charge uniquement par la famille"
+        ],
+        answer: 0,
+        explanation: "L’accueil inclusif demande une réflexion collective, des partenariats si nécessaire, et une adaptation au plus près des besoins de l’enfant."
+      },
+      {
+        question: "Lorsqu’un professionnel se sent en difficulté avec un enfant, il est préférable de :",
+        options: [
+          "En parler en équipe ou à sa hiérarchie pour prendre du recul",
+          "Attendre que la situation disparaisse seule",
+          "Se dire que c’est forcément la faute de l’enfant"
+        ],
+        answer: 0,
+        explanation: "La prise de recul et le travail d’équipe permettent d’éviter l’isolement professionnel et d’améliorer l’accompagnement de l’enfant."
+      },
+      {
+        question: "Les écrans pour les jeunes enfants doivent être considérés avec prudence car :",
+        options: [
+          "Ils remplacent efficacement l’interaction adulte-enfant",
+          "Le jeune enfant a surtout besoin d’interactions, de langage, de jeu réel et de mouvement",
+          "Ils sont nécessaires pour apprendre à parler"
+        ],
+        answer: 1,
+        explanation: "Le développement du jeune enfant repose fortement sur les interactions humaines, le langage adressé, le jeu actif et l’exploration sensorimotrice."
+      },
+      {
+        question: "Une limite posée à un enfant doit idéalement être :",
+        options: [
+          "Brutale pour être bien comprise",
+          "Claire, stable, expliquée avec des mots simples et adaptée à son âge",
+          "Variable selon l’humeur de l’adulte"
+        ],
+        answer: 1,
+        explanation: "Un cadre sécurisant suppose des limites compréhensibles, cohérentes et portées par des adultes disponibles."
+      },
+      {
+        question: "Le projet d’établissement sert notamment à :",
+        options: [
+          "Décrire les grandes orientations et les pratiques de la structure",
+          "Faire joli dans un classeur",
+          "Remplacer les échanges d’équipe"
+        ],
+        answer: 0,
+        explanation: "Le projet d’établissement donne du sens aux pratiques. Il doit être vivant, partagé et régulièrement réinterrogé."
+      }
+    ];
 
-      if (!reponse) {
-        resultat.textContent = "Merci de sélectionner une réponse.";
-        resultat.style.color = "#b45309";
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const scoreLive = document.getElementById("scoreLive");
+    const progress = document.getElementById("progress");
+    const questionText = document.getElementById("questionText");
+    const optionsContainer = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+    const validateBtn = document.getElementById("validateBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const quizContainer = document.getElementById("quizContainer");
+
+    function renderQuestion() {
+      answered = false;
+      const q = questions[currentQuestion];
+
+      questionNumber.textContent = "Question " + (currentQuestion + 1) + " / " + questions.length;
+      scoreLive.textContent = "Score : " + score;
+      progress.style.width = ((currentQuestion) / questions.length * 100) + "%";
+
+      questionText.textContent = q.question;
+      optionsContainer.innerHTML = "";
+      feedback.className = "feedback";
+      feedback.innerHTML = "";
+
+      q.options.forEach((option, index) => {
+        const label = document.createElement("label");
+        label.className = "option";
+        label.innerHTML = `
+          <input type="radio" name="answer" value="${index}">
+          ${option}
+        `;
+        optionsContainer.appendChild(label);
+      });
+
+      validateBtn.style.display = "inline-block";
+      nextBtn.style.display = "none";
+    }
+
+    function validateAnswer() {
+      if (answered) {
         return;
       }
 
-      if (reponse.value === "vrai") {
-        resultat.textContent = "Bonne réponse.";
-        resultat.style.color = "green";
+      const selected = document.querySelector('input[name="answer"]:checked');
+
+      if (!selected) {
+        feedback.className = "feedback visible bad";
+        feedback.innerHTML = "Merci de sélectionner une réponse avant de valider.";
+        return;
+      }
+
+      answered = true;
+      const selectedIndex = Number(selected.value);
+      const q = questions[currentQuestion];
+      const labels = document.querySelectorAll(".option");
+
+      labels.forEach((label, index) => {
+        if (index === q.answer) {
+          label.classList.add("correct");
+        }
+
+        if (index === selectedIndex && selectedIndex !== q.answer) {
+          label.classList.add("incorrect");
+        }
+      });
+
+      if (selectedIndex === q.answer) {
+        score++;
+        feedback.className = "feedback visible good";
+        feedback.innerHTML = `
+          <strong>Bonne réponse.</strong><br>
+          ${q.explanation}
+        `;
       } else {
-        resultat.textContent = "Ce n’est pas la bonne réponse. La qualité d’accueil est une notion globale.";
-        resultat.style.color = "red";
+        feedback.className = "feedback visible bad";
+        feedback.innerHTML = `
+          <strong>Mauvaise réponse.</strong><br>
+          ${q.explanation}
+        `;
+      }
+
+      scoreLive.textContent = "Score : " + score;
+      validateBtn.style.display = "none";
+      nextBtn.style.display = "inline-block";
+
+      if (currentQuestion === questions.length - 1) {
+        nextBtn.textContent = "Voir le résultat final";
+      } else {
+        nextBtn.textContent = "Question suivante";
       }
     }
+
+    function nextQuestion() {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        showFinalResult();
+      }
+    }
+
+    function showFinalResult() {
+      progress.style.width = "100%";
+
+      let message = "";
+
+      if (score >= 17) {
+        message = "Très bon niveau. Les repères professionnels sont bien maîtrisés.";
+      } else if (score >= 13) {
+        message = "Bon niveau. Quelques points peuvent encore être consolidés.";
+      } else if (score >= 8) {
+        message = "Niveau intermédiaire. Une reprise collective des notions serait utile.";
+      } else {
+        message = "Des rappels importants sont nécessaires. Le quiz peut être refait après relecture des ressources.";
+      }
+
+      quizContainer.innerHTML = `
+        <div class="resultat-final">
+          <h3>Résultat final</h3>
+          <div class="score">${score} / ${questions.length}</div>
+          <p>${message}</p>
+          <button class="btn-primary" onclick="restartQuiz()">Recommencer le quiz</button>
+        </div>
+      `;
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      location.reload();
+    }
+
+    renderQuestion();
   </script>
 
 </body>
