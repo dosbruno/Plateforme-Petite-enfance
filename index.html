@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plateforme Petite Enfance - Maurepas</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #1f2933;
+    }
+
+    header {
+      background: #005f73;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      background: white;
+      margin-bottom: 20px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      color: #005f73;
+      margin-top: 0;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    .quiz-question {
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #0a9396;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #007f82;
+    }
+
+    #resultat {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Plateforme Petite Enfance</h1>
+    <p>Ressources, informations et quiz pour les professionnels du service</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Bienvenue</h2>
+      <p>
+        Cette plateforme a vocation à centraliser des ressources utiles pour les équipes Petite Enfance :
+        rappels réglementaires, informations internes, supports de formation et quiz de révision.
+      </p>
+    </section>
+
+    <section>
+      <h2>Rubriques prévues</h2>
+      <ul>
+        <li>Actualités du service Petite Enfance</li>
+        <li>Ressources réglementaires</li>
+        <li>Qualité d’accueil</li>
+        <li>Santé, sécurité et prévention</li>
+        <li>Quiz de formation pour les agents</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Premier quiz</h2>
+
+      <div class="quiz-question">
+        <p>Question : en crèche, la qualité d’accueil concerne principalement :</p>
+
+        <label>
+          <input type="radio" name="quiz" value="faux">
+          uniquement l’hygiène des locaux
+        </label>
+        <br>
+
+        <label>
+          <input type="radio" name="quiz" value="vrai">
+          le bien-être de l’enfant, la sécurité affective, les pratiques professionnelles et la relation aux familles
+        </label>
+        <br>
+
+        <label>
+          <input type="radio" name="quiz" value="faux">
+          uniquement le respect des horaires
+        </label>
+      </div>
+
+      <button onclick="verifierReponse()">Valider ma réponse</button>
+
+      <p id="resultat"></p>
+    </section>
+
+  </main>
+
+  <footer>
+    Ville de Maurepas - Service Petite Enfance
+  </footer>
+
+  <script>
+    function verifierReponse() {
+      const reponse = document.querySelector('input[name="quiz"]:checked');
+      const resultat = document.getElementById('resultat');
+
+      if (!reponse) {
+        resultat.textContent = "Merci de sélectionner une réponse.";
+        resultat.style.color = "#b45309";
+        return;
+      }
+
+      if (reponse.value === "vrai") {
+        resultat.textContent = "Bonne réponse.";
+        resultat.style.color = "green";
+      } else {
+        resultat.textContent = "Ce n’est pas la bonne réponse. La qualité d’accueil est une notion globale.";
+        resultat.style.color = "red";
+      }
+    }
+  </script>
+
+</body>
+</html>
