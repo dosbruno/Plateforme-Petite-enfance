@@ -1,14 +1,9 @@
-# Ressources Petite Enfance - version sans dossiers
+# Ressources Petite Enfance - version épurée
 
-Cette version est prévue pour un upload GitHub très simple : tous les fichiers sont à mettre à la racine du dépôt.
-
-## À envoyer sur GitHub
-Sélectionner tous les fichiers de ce dossier et les déposer dans GitHub.
-
-Il n'y a pas de dossier assets ni de dossier fiches dans cette version.
+Mini-site autonome de formation et d'information pour les professionnels de la Petite Enfance.
 
 ## Contenu
-- index.html
+- index.html : page d'accueil épurée et visuelle
 - gestes-postures.html
 - qualite-accueil.html
 - pedagogie-auteurs.html
@@ -21,10 +16,4 @@ Il n'y a pas de dossier assets ni de dossier fiches dans cette version.
 - fiches PDF
 
 ## Déploiement GitHub Pages
-1. Tout envoyer à la racine du dépôt.
-2. Commit changes.
-3. Attendre 1 à 3 minutes.
-4. Ouvrir le lien GitHub Pages.
-
-## Règle d'usage
-Ne pas saisir ni publier de données personnelles : noms d'enfants, familles, agents, situations médicales, RH, signalements ou situations individuelles.
+Sélectionner tous les fichiers du dossier et les déposer à la racine du dépôt GitHub.
