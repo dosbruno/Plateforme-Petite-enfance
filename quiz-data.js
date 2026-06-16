@@ -862,5 +862,101 @@ const QUIZ_SETS = {
         "explanation": "Sinon elle reste décorative."
       }
     ]
+  },
+  "sppe_qualite_inspection": {
+    "title": "SPPE, qualité et inspection",
+    "description": "10 questions sur les grands repères actuels du secteur.",
+    "questions": [
+      {
+        "question": "Le SPPE vise à garantir aux familles une solution d’accueil de qualité pour leur jeune enfant.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 0,
+        "explanation": "C’est l’objectif général présenté par le ministère."
+      },
+      {
+        "question": "Le SPPE concerne uniquement les crèches municipales.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 1,
+        "explanation": "Il concerne plus largement l’accueil du jeune enfant et l’organisation de l’offre."
+      },
+      {
+        "question": "Le référentiel qualité 2025 aborde la relation au jeune enfant, aux parents et la qualité organisationnelle.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 0,
+        "explanation": "Ces trois axes structurent le référentiel."
+      },
+      {
+        "question": "Un contrôle porte uniquement sur la présence de documents administratifs.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 1,
+        "explanation": "Les pratiques, l’organisation, la sécurité et la qualité réelle sont aussi en jeu."
+      },
+      {
+        "question": "Le guide d’inspection-contrôle peut être utilisé comme support d’auto-questionnement.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 0,
+        "explanation": "Même s’il vise les contrôles, il aide à identifier les attendus."
+      },
+      {
+        "question": "Les Pros de la Petite Enfance est une source institutionnelle officielle.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 1,
+        "explanation": "C’est une source professionnelle utile, mais elle ne remplace pas les textes officiels."
+      },
+      {
+        "question": "La qualité d’accueil se résume à l’état des locaux.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 1,
+        "explanation": "Elle concerne aussi les relations, les pratiques, les parents et l’organisation."
+      },
+      {
+        "question": "Les professionnels de terrain ont un rôle dans la réussite du SPPE.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 0,
+        "explanation": "La qualité se construit aussi dans les pratiques quotidiennes."
+      },
+      {
+        "question": "Une fiche synthétique peut aider à rendre un texte officiel plus accessible.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 0,
+        "explanation": "Elle peut servir de porte d’entrée avant d’aller vers le texte complet."
+      },
+      {
+        "question": "Un site ressources doit permettre d’aller vers les sources complètes.",
+        "options": [
+          "Vrai",
+          "Faux"
+        ],
+        "answer": 0,
+        "explanation": "Les liens utiles sont essentiels pour approfondir et vérifier."
+      }
+    ]
   }
 };

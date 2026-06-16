@@ -32,3 +32,15 @@ footer{background:#263846;color:#fff;padding:28px 18px}footer p{color:rgba(255,2
 .clean-links{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.clean-card{background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:26px;padding:22px;box-shadow:var(--shadow);min-height:210px;transition:.15s ease}.clean-card:hover{transform:translateY(-3px);text-decoration:none}.clean-card .emoji{font-size:36px;margin-bottom:10px;display:block}.clean-card h2{font-size:21px;margin:0 0 8px}.clean-card p{color:var(--muted);margin:0}.simple-title{margin:0 0 20px}.simple-title h2{font-size:30px;letter-spacing:-.6px;margin:0 0 8px}.simple-title p{color:var(--muted);max-width:780px}.footer-inner p{margin:0;text-align:center}
 @media(max-width:980px){.hero-visual{grid-template-columns:1fr}.clean-links{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.clean-links{grid-template-columns:1fr}.visual-board{min-height:250px}.visual-item{padding:12px}.visual-item.one{left:18px;top:34px}.visual-item.two{right:18px;top:62px}.visual-item.three{left:42px;bottom:34px}}
+
+.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.source-card{position:relative;overflow:hidden;min-height:210px}
+.source-card:after{content:"";position:absolute;right:-35px;top:-35px;width:120px;height:120px;border-radius:50%;background:rgba(242,179,102,.18)}
+.source-card .emoji{font-size:34px;display:block;margin-bottom:8px}
+.feature-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.feature{border-radius:24px;padding:20px;background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(233,244,247,.86));border:1px solid var(--border)}
+.feature .emoji{font-size:30px;display:block;margin-bottom:8px}
+.hero-mini{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.hero-mini span{display:inline-flex;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.24);color:#fff}
+@media(max-width:980px){.source-grid,.feature-strip{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.source-grid,.feature-strip{grid-template-columns:1fr}}
